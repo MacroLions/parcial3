@@ -19,7 +19,9 @@ namespace Parcial3.Data
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@nombreUsuario", nUsuario.NombreUsuario);
-                cmd.Parameters.AddWithValue("@passwordsuario", nUsuario.PasswordUsuario);
+
+                cmd.Parameters.AddWithValue("@passwordsuario", Encriptar.GetSHA256(nUsuario.PasswordUsuario));
+                
 
 
                 try
@@ -106,7 +108,7 @@ namespace Parcial3.Data
                             {
                                 Id_Usuario = Convert.ToInt32(dr["id_Usuario"]),
                                 NombreUsuario = dr["nombreUsuario"].ToString(),
-                                PasswordUsuario = Encriptar.GetSHA256(dr["passwordUsuario"].ToString()),
+                                PasswordUsuario =dr["passwordUsuario"].ToString(),
                             };
                         }
                     }
@@ -142,7 +144,7 @@ namespace Parcial3.Data
                             {
                                 Id_Usuario = Convert.ToInt32(dr["id_Usuario"]),
                                 NombreUsuario = dr["nombreUsuario"].ToString(),
-                                PasswordUsuario = Encriptar.GetSHA256(dr["passwordUsuario"].ToString()),
+                                PasswordUsuario =dr["passwordUsuario"].ToString(),
                             };
                             listaUsuario.Add(nUsuario);
                         }
